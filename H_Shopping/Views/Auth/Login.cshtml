@@ -1,0 +1,27 @@
+﻿<section id="form" style="margin-top: 0">
+	<!--form-->
+	<div class="container">
+		<div style="display: flex; justify-content: center">
+			<div class="signup-form"
+				 style="max-width: 700px;
+					width: 100%; padding: 20px;
+					border: 1px solid #ccc;
+					border-radius: 5px;">
+				<!--sign up form-->
+				<h2 class="text-center">Signin for buy item</h2>
+				<form action="#" style="justify-content: center; display: flex; flex-direction: column">
+					<input type="email" placeholder="Email Address" />
+					<input type="password" placeholder="Password" />
+					<button style="height: 4rem" type="submit" class="btn btn-default">Signup</button>
+					<button style="height: 4rem; width: 100%; background-color: aliceblue; color: black; border: 1px solid gray; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin-top: 10px" type="submit" class="btn">
+						<img src="~/images/client/icon/google_icon.png" alt="Google Logo" style="width: 20px; margin-right: 10px;">
+						Signup with Google
+					</button>
+					<div class="text-center" style="margin-top: 10px">
+						<p>You don't have an account? <a href="@Url.Action("Register", "Auth")">Signup</a></p>
+					</div>
+				</form>
+			</div><!--/sign up form-->
+		</div>
+	</div>
+</section><!--/form-->

@@ -1,0 +1,8 @@
+﻿@model IEnumerable<BrandModel>
+@using H_Shopping.Services.IService
+@inject IBrandService brandService
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("Index", "Brand", new {slug=item.Slug})"> <span class="pull-right">(@await brandService.ProductQuantity(item.Slug))</span>@item.Name</a></li>
+}

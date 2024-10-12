@@ -1,0 +1,55 @@
+﻿@page "/login"
+@model LoginModel
+
+@{
+    // ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <section id="form" style="margin-top: 0; margin-bottom: 8rem">
+        <!--form-->
+        <div class="container">
+            <div style="display: flex; justify-content: center">
+                <div class="signup-form"
+                     style="max-width: 700px;
+					width: 100%; padding: 20px;
+					border: 1px solid #ccc;
+					border-radius: 5px;">
+                    <!--sign up form-->
+                    <h2 class="text-center">Signin for buy item</h2>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert" style="margin-left: -35px"></div>
+                    <form id="account" method="post" style="justify-content: center; display: flex; flex-direction: column">
+                        <input asp-for="Input.EmailOrUserName" autocomplete="email" aria-required="true" placeholder="name@example.com" />
+                        <span asp-validation-for="Input.EmailOrUserName" class="text-danger"></span>
+                        <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        @* <label asp-for="Input.RememberMe" style="flex-direction: row">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label> *@
+                        <button id="login-submit" style="height: 4rem" type="submit" class="btn btn-default">Signin</button>
+                        <button style="height: 4rem; width: 100%; background-color: aliceblue; color: black; border: 1px solid gray; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; margin-top: 10px" class="btn">
+                            <img src="~/images/client/icon/google_icon.png" alt="Google Logo" style="width: 20px; margin-right: 10px;">
+                            Signup with Google
+                        </button>
+                        <div style="display: flex; flex-direction: column; align-items:end">
+                            <p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                            <p>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </p>
+                        </div>
+                        <div class="text-center" style="margin-top: 10px">
+                            <p>You don't have an account? <a href="/register">Signup</a></p>
+                        </div>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </section><!--/form-->
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using H_Shopping.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if(SignInManager.IsSignedIn(User))
+{
+    <li style="padding-right: 8px">
+        @if (@UserManager.GetUserName(User).Length >= 10)
+        {
+            <a href="@Url.Action("Login", "Auth")">
+                <i class="fa fa-user"></i>
+                @UserManager.GetUserName(User).Substring(0, 10)...
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Auth")">
+                <i class="fa fa-user"></i>
+                @UserManager.GetUserName(User)
+            </a>
+        }
+    </li>
+    <li><a class="Danger danger-color" data-toggle="modal" data-target="#DangerModalblbgpro" style="cursor:pointer" id="myBtn"><i class="fa fa-sign-out"></i>Logout</a></li>
+
+    <div id="DangerModalblbgpro" class="modal modal-edu-general FullColor-popup-DangerModal PrimaryModal-bgcolor fade" role="dialog">
+        <div class="modal-dialog" style="max-width: 400px; width: 100%;">
+            <div class="modal-content">
+                <div class="modal-close-area modal-close-df">
+                    @* <a class="close" data-dismiss="modal" href="#">
+                <i class="fa fa-solid fa-circle-xmark"></i>
+                </a> *@
+                </div>
+                <div class="modal-body text-center">
+                    <h2>Logout</h2>
+                    <p>Do you want to logout?</p>
+                </div>
+                <div class="modal-footer" style="display: flex; justify-content: center; flex-wrap: wrap;">
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <a data-dismiss="modal" class="btn btn-primary" style="margin-right: 5px;margin: 0" href="#">Cancel</a>
+                        <button type="submit" class="btn btn-primary" style="background-color: #F45846; margin: 0 5px;padding: 10px 14px">
+                            Confirm
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <li><a href="/login"><i class="fa fa-user"></i>Login</a></li>
+    <li><a href="/register"><i class="fa fa-lock"></i>Register</a></li>
+}
