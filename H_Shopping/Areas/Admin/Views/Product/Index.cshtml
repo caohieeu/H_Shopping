@@ -1,0 +1,191 @@
+﻿@using Newtonsoft.Json
+@using H_Shopping.Models;
+
+@model IEnumerable<ProductModel>
+
+@{
+    ProductModel product = new ProductModel();
+    if (TempData["Brand"] != null)
+    {
+        string productJson = TempData["Brand"].ToString();
+        product = JsonConvert.DeserializeObject<ProductModel>(productJson);
+    }
+}
+
+@if (product?.Name != null)
+{
+    <a hidden id="ModalEdit" class="zoomInDown mg-t" data-toggle="modal" data-target="#zoomInDown2"></a>
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="product-status-wrap">
+        <h4>Product List</h4>
+        <div class="add-product">
+            <div class="modal-bootstrap modal-login-form" style="background-color: white">
+                <a class="zoomInDown mg-t" href="#" data-toggle="modal" data-target="#zoomInDown1">Add Product</a>
+            </div>
+            <div id="zoomInDown1" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                                <div class="row" style="display: flex; flex-direction: column; justify-content: center">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="basic-login-inner modal-basic-inner">
+                                            <div>
+                                                <h3>Add Brand</h3>
+                                                <p>Add new Brand for add product</p>
+                                            </div>
+                                            <form asp-controller="Product" asp-action="Add" method="post">
+                                                <div class="form-group-inner" style="margin-bottom: 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div class="form-group">
+                                                                <input name="Name" type="text" class="form-control" placeholder="Name of brand">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input name="Description" type="text" class="form-control" placeholder="Description">
+                                                            </div>
+                                                            <div class="form-group res-mg-t-15">
+                                                                <input name="Slug" type="text" class="form-control" placeholder="slug">
+                                                            </div>
+                                                            <div class="i-checks pull-left">
+                                                                <label>
+                                                                    <input name="Status" type="checkbox" value=1 checked> <i></i> Active
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="login-btn-inner">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: flex-end; padding-right: 0">
+                                                        <div class="login-horizental" style="margin-top: 5px">
+                                                            <button style="padding: 5px 14px" class="btn btn-sm btn-primary login-submit-cs" type="submit">Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* Modal edit partial *@
+            <div id="zoomInDown2" class="modal modal-edu-general modal-zoomInDown fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-close-area modal-close-df">
+                            <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-login-form-inner">
+                                <div class="row" style="display: flex; flex-direction: column; justify-content: center">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="basic-login-inner modal-basic-inner">
+                                            <div>
+                                                <h3>Edit Product</h3>
+                                                <p>Edit product to update your new information</p>
+                                            </div>
+                                            <form asp-controller="Product" asp-action="Edit" method="post">
+                                                <div class="form-group-inner" style="margin-bottom: 0">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <div hidden class="form-group">
+                                                                <input name="Id" value="@product?.Id" type="text" class="form-control" placeholder="Id of product">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input name="Name" value="@product?.Name" type="text" class="form-control" placeholder="Name of product">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input name="Description" value="@product?.Description" type="text" class="form-control" placeholder="Description">
+                                                            </div>
+                                                            <div class="form-group res-mg-t-15">
+                                                                <input name="Price" value="@product?.Price" type="number" class="form-control" placeholder="Price">
+                                                            </div>
+                                                            <div class="form-group res-mg-t-15">
+                                                                <input name="Stock" value="@product?.Stock" type="number" class="form-control" placeholder="Stock">
+                                                            </div>
+                                                            @* <div class="i-checks pull-left"> *@
+                                                            @*     <label> *@
+                                                            @*         <input name="Status" type="checkbox" value=1 @(product?.Status == 1 ? "checked" : "")> <i></i> Active *@
+                                                            @*     </label> *@
+                                                            @* </div> *@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="login-btn-inner">
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: flex-end; padding-right: 0">
+                                                        <div class="login-horizental" style="margin-top: 5px">
+                                                            <button style="padding: 5px 14px" class="btn btn-sm btn-primary login-submit-cs" type="submit">Save Change</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="asset-inner">
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        @if (item.Description.Length >= 100)
+                        {
+                            <td>@item.Description.Substring(0, 100)...</td>
+                        }
+                        else
+                        {
+                            <td>@item.Description</td>
+                        }
+                        <td>@item.Price</td>
+                        <td>@item.Stock</td>
+                        <td style="display: flex; flex-direction: row">
+                            <a asp-controller="Product" asp-action="Edit" asp-route-brandId="@item.Id">
+                                <button data-toggle="tooltip" title="Edit" class="pd-setting-ed">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                            <form asp-controller="Product" asp-action="Delete" method="post" asp-route-branId="@item.Id">
+                                <button data-toggle="tooltip" title="Trash" class="pd-setting-ed">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="custom-pagination">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

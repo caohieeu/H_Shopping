@@ -21,7 +21,7 @@
 						<a href="@Url.Action("Detail", "Product", new {id=@item.Id})">
 							<div class="single-products">
 								<div class="productinfo text-center">
-									<img src="@item.images.FirstOrDefault().url" alt="" />
+									<img src="@item.images?.FirstOrDefault()?.url" alt="" />
 									<h2>@item.Price đ</h2>
 									<p>@item.Name</p>
 									<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
